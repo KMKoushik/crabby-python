@@ -18,6 +18,14 @@ export AUCTION_URL=https://beta-squeeth-portal-ropsten.vercel.app/
 export CHAIN_ID=3
 ```
 
+Goerli:
+
+```
+export PRIVATE_KEY=***
+export AUCTION_URL=https://squeeth-portal-test.vercel.app/
+export CHAIN_ID=5
+```
+
 Install requirement
 ```
 pip install -r requirements.txt

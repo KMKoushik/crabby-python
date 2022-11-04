@@ -4,6 +4,8 @@ from eth_account.messages import encode_structured_data
 import requests
 import time
 
+print(os.environ.get("CHAIN_ID"))
+
 NETWORK = int(os.environ.get("CHAIN_ID"))
 AUCTION_URL = os.environ.get("AUCTION_URL")
 PRIVATE_KEY = os.environ.get("PRIVATE_KEY")
@@ -13,11 +15,18 @@ print("Using address: ", CURRENT_ACCOUNT.address)
 
 DELETE_BID_MSG = "I authorize to delete the bid"
 
+verifying_contract = "0xdd1e9c25115e0d6e531d9f9e6ab7dbbed15158ce"
+
+if NETWORK == 3:
+    verifying_contract = "0xdd1e9c25115e0d6e531d9f9e6ab7dbbed15158ce"
+elif NETWORK == 5:
+    verifying_contract = "0x49a423Bc9F1dEe5A052b1E72a1dbE9de488d4411"
+
 
 DOMAIN = {
     "chainId": NETWORK,
     "name": 'CrabOTC',
-    "verifyingContract": "0xdd1e9c25115e0d6e531d9f9e6ab7dbbed15158ce" if NETWORK == 3 else "0x3b960e47784150f5a63777201ee2b15253d713e8",
+    "verifyingContract": verifying_contract,
     "version": '2',
 }
 
@@ -120,7 +129,7 @@ auctionObj = get_latest_auction()
 auction = auctionObj['auction']
 bidId = auction['currentAuctionId']
 quantity = 1000000000000000000  # 1 oSQTH
-price = 200000000000000000  # .2 WETH
+price = 500000000000000000  # .2 WETH
 isBuying = auction['isSelling']  # If auction is selling you are buying
 
 # Auction will be settled in 10m, Just to be safer side we are using 20m
@@ -135,4 +144,7 @@ print(
 
 user_bid_id = create_or_edit_bid(bidId, CURRENT_ACCOUNT.address,
                                  quantity, price, isBuying, expiry, nonce)
+
 print("Created new bid: ", user_bid_id)
+
+#delete_bid(user_bid_id)
