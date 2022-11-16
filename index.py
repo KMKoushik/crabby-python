@@ -15,7 +15,7 @@ print("Using address: ", CURRENT_ACCOUNT.address)
 
 DELETE_BID_MSG = "I authorize to delete the bid"
 
-verifying_contract = "0xdd1e9c25115e0d6e531d9f9e6ab7dbbed15158ce"
+verifying_contract = "0x3B960E47784150F5a63777201ee2B15253D713e8"
 
 if NETWORK == 3:
     verifying_contract = "0xdd1e9c25115e0d6e531d9f9e6ab7dbbed15158ce"
